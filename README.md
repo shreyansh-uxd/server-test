@@ -1,27 +1,94 @@
-# server-test (MERN starter)
+# Server Test - Full Stack Application
 
-This workspace contains a simple MERN starter with two folders:
+A full-stack application with React frontend and Express/MongoDB backend.
 
-- `frontend` - Vite + React app (MVVM structure)
-- `backend` - Node + Express + Mongoose API
-
-Quick start (PowerShell):
-
-1. Backend
-
-   - Copy `.env.example` to `.env` inside `backend` and ensure `MONGO_URI` is set.
-   - Install and start:
+## Project Structure
 
 ```
-cd backend; npm install; npm run dev
+server-test/
+├── backend/          # Express.js backend
+├── frontend/         # React frontend
+├── package.json      # Root package.json for shared commands
+├── render.yaml       # Render deployment configuration
+└── Dockerfile        # Docker configuration
 ```
 
-2. Frontend
+## Development Setup
 
-   - By default the frontend will call `http://localhost:4000`. To change it, set `VITE_API_BASE` in the environment.
+### Prerequisites
+- Node.js (v16 or higher)
+- npm (v8 or higher)
 
+### Installation
+```bash
+# Install all dependencies (root, backend, and frontend)
+npm run install:all
+
+# Or install individually
+npm install              # Root dependencies
+npm run install:backend  # Backend dependencies
+npm run install:frontend # Frontend dependencies
 ```
-cd frontend; npm install; npm run dev
+
+### Running the Application
+
+```bash
+# Run both frontend and backend concurrently
+npm run dev
+
+# Or run individually
+npm run dev:backend   # Backend only (port 4000)
+npm run dev:frontend  # Frontend only (port 5173)
 ```
 
-Now open http://localhost:3000 and use the form to create a user. The backend runs on port 4000 by default.
+## Production Deployment
+
+### Using Render
+
+1. Connect your GitHub repository to Render
+2. Use the `render.yaml` configuration file
+3. The build process will:
+   - Install all dependencies
+   - Build the React frontend
+   - Serve frontend from the Express backend
+
+### Manual Deployment
+
+```bash
+# Build the frontend
+npm run build
+
+# Start the production server
+npm start
+```
+
+### Using Docker
+
+```bash
+# Build the Docker image
+docker build -t server-test .
+
+# Run the container
+docker run -p 4000:4000 server-test
+```
+
+## Environment Variables
+
+Make sure to set these environment variables in your deployment platform:
+
+- `NODE_ENV=production`
+- `PORT` (will be set automatically by most platforms)
+- MongoDB connection string (currently hardcoded in backend/index.js)
+
+## API Endpoints
+
+- `GET /api/users` - Fetch all users
+- `POST /api/users` - Create a new user
+
+## Features
+
+- User creation with name and email
+- User listing with refresh functionality
+- Error handling and loading states
+- Responsive design
+- Production-ready build configuration

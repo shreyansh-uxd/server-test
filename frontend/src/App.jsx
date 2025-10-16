@@ -8,7 +8,10 @@ function App() {
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const API_BASE_URL = 'https://server-test-12.onrender.com/api'
+  // Use relative URL in production, full URL in development
+  const API_BASE_URL = import.meta.env.PROD 
+    ? '/api' 
+    : 'https://server-test-12.onrender.com/api'
 
   // Fetch users on component mount
   useEffect(() => {
