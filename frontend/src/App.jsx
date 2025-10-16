@@ -8,7 +8,7 @@ function App() {
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const API_BASE_URL = 'http://localhost:4000/api'
+  const API_BASE_URL = 'https://server-test-12.onrender.com/api'
 
   // Fetch users on component mount
   useEffect(() => {
